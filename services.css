@@ -1,0 +1,157 @@
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Playfair Display", serif; }
+body {
+    background-image: url('assets/background/all.png');
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0;
+    background: rgba(131, 58, 112, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.nav-left { display: flex; align-items: center; gap: 15px; }
+.nav-left img { height: 55px; filter: drop-shadow(0 0 12px rgba(255,220,90,0.7)); }
+.nav-title { color: #ffdc5a; font-size: 28px; letter-spacing: 4px; font-weight: bold; }
+.nav-center a { margin: 0 20px; color: white; font-size: 18px; letter-spacing: 3px; text-decoration: none; transition: 0.3s; }
+.nav-center a:hover, .nav-center a.active { color: #ffd6e8; }
+.book-btn {
+    background: linear-gradient(135deg, #f08bb6, #e76fa3);
+    padding: 12px 32px; color: white; border-radius: 30px; letter-spacing: 2px;
+    font-weight: bold; text-decoration: none; border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 15px rgba(240,139,182,0.4); transition: all 0.3s;
+}
+.book-btn:hover { background: linear-gradient(135deg, #ffaccf, #ff8bb9); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(240,139,182,0.6); }
+
+
+.services-header {
+    text-align: center;
+    padding: 180px 20px 80px;
+}
+.services-title {
+    font-size: 100px;
+    letter-spacing: 12px;
+    color: white;
+    text-shadow: 0 0 30px rgba(255,255,255,0.4);
+    font-weight: bold;
+}
+
+.services-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 20px 120px;
+}
+
+.service-category {
+    margin-bottom: 120px;
+}
+.category-title {
+    font-size: 80px;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #ffdc5a;
+    text-shadow: 0 0 30px rgba(255,220,90,0.8);
+}
+.glow { text-shadow: 0 0 40px rgba(255,220,90,0.9); }
+
+.service-grid {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+}
+.service-item {
+    background: rgba(0,0,0,0.35);
+    padding: 40px 50px;
+    border-radius: 30px;
+    min-width: 380px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.service-item.full { min-width: 600px; max-width: 800px; }
+
+.service-item h3 {
+    font-size: 32px;
+    color: #ffd6e8;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+}
+.service-item ul {
+    list-style: none;
+}
+.service-item li {
+    font-size: 22px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+}
+.service-item li:last-child { border-bottom: none; }
+.service-item span {
+    color: #ffdc5a;
+    font-weight: bold;
+}
+
+.home-fee {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 30px;
+    color: #ffd6e8;
+}
+.home-fee span {
+    color: #ffdc5a;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+
+@media (max-width: 992px) {
+    .service-grid { gap: 60px; }
+    .service-item, .service-item.full { min-width: 90%; }
+}
+@media (max-width: 768px) {
+    .navbar { padding: 15px 30px; }
+    .nav-left img { height: 45px; }
+    .nav-title { font-size: 24px; }
+    .nav-center a { font-size: 16px; margin: 0 10px; }
+
+    .services-title { font-size: 70px; }
+    .category-title { font-size: 60px; }
+    .service-item { padding: 30px; }
+    .service-item h3 { font-size: 28px; }
+    .service-item li { font-size: 19px; }
+}
+
+
+.logout-btn {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid #ffdc5a;
+    color: #ffdc5a;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 220, 90, 0.3);
+    color: white;
+    border-color: white;
+    box-shadow: 0 8px 25px rgba(255, 220, 90, 0.5);
+    transform: translateY(-3px);
+}

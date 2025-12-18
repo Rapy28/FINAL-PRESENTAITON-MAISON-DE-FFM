@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="inventory.css">
+</head>
+<body>
+  <h1>Salon Inventory</h1>
+  <table id="inventory-table">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Reorder Level</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <h2>Add New Item</h2>
+  <form id="add-inventory-form">
+    <input type="text" name="itemName" placeholder="Item Name" required>
+    <input type="number" name="quantity" placeholder="Quantity" required>
+    <input type="number" name="reorderLevel" placeholder="Reorder Level" required>
+    <input type="number" name="cost" placeholder="Cost" required>
+    <button type="submit">Add Item</button>
+  </form>
+  <script src="inventory.js"></script>
+</body>
+</html>

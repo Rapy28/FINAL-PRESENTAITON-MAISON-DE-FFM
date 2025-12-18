@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Maison De FFM</title>
+    <link rel="stylesheet" href="signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+
+    <div class="login-container">
+        <!-- LEFT SIDE: Branding -->
+        <div class="login-left">
+            <img src="assets/logo/FFM.png" alt="Maison De FFM Logo" class="login-logo">
+            <h1>MAISON DE FFM</h1>
+            <p>Premium Home Beauty & Wellness</p>
+        </div>
+
+        <!-- RIGHT SIDE: Signup Form -->
+        <div class="login-right">
+            <div class="login-box">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join us for personalized beauty at home</p>
+
+                <form id="signup-form">
+                    <input type="text" name="fullName" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <input type="text" name="address" placeholder="Full Address" required>
+
+                    <div class="select-wrapper">
+                        <select name="gender" required>
+                            <option value="" disabled selected>Gender</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="birthday-wrapper">
+                        <input type="date" name="birthday" required>
+                    </div>
+
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+
+                    <!-- Account Type Dropdown with Beautician -->
+                    <div class="select-wrapper account-type-wrapper">
+                        <select name="accountType" id="account-type" required>
+                            <option value="" disabled selected>Account Type</option>
+                            <option value="client">Client</option>
+                            <option value="beautician">Beautician</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <!-- Code Field (for Admin & Beautician) -->
+                    <div class="admin-code-wrapper">
+                        <input type="text" id="signup-admin-code" placeholder="CODE (Required only for Admin/Beautician)">
+                        <small class="admin-note">Enter code only if registering as Admin or Beautician</small>
+                    </div>
+
+                    <button type="submit" class="login-submit">SIGN UP</button>
+                </form>
+
+                <div class="signup">
+                    Already have an account? <a href="login.html">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const ADMIN_CODE = "FFMADMIN2025";
+    const BEAUTICIAN_CODE = "BEATICIANFFM2025";
+
+    const form = document.getElementById('signup-form');
+    const accountTypeSelect = document.getElementById('account-type');
+    const codeInput = document.getElementById('signup-admin-code');
+    const codeNote = document.querySelector('.admin-note');
+
+    // Dynamically update code field based on selected role
+    accountTypeSelect.addEventListener('change', function () {
+        if (this.value === 'admin' || this.value === 'beautician') {
+            codeInput.required = true;
+            codeInput.placeholder = "CODE (Required)";
+            codeNote.style.opacity = "1";
+        } else {
+            codeInput.required = false;
+            codeInput.placeholder = "CODE (Optional - leave blank)";
+            codeNote.style.opacity = "0.6";
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Password match check
+        const pwd = form.password.value;
+        const confirm = form.confirmPassword.value;
+        if (pwd !== confirm) {
+            alert('Passwords do not match.');
+            return;
+        }
+
+        const selectedRole = accountTypeSelect.value;
+
+        // Validate code for Admin or Beautician
+        if (selectedRole === 'admin') {
+            const enteredCode = codeInput.value.trim().toUpperCase();
+            if (enteredCode !== ADMIN_CODE) {
+                alert('Invalid Admin Code.');
+                return;
+            }
+        } else if (selectedRole === 'beautician') {
+            const enteredCode = codeInput.value.trim().toUpperCase();
+            if (enteredCode !== BEAUTICIAN_CODE) {
+                alert('Invalid Beautician Code.');
+                return;
+            }
+        }
+        // Client needs no code
+
+        // Save user data
+        const userData = {
+            name: form.fullName.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            birthday: form.birthday.value,
+            address: form.address.value,
+            gender: form.gender.value
+        };
+
+        localStorage.setItem('mdffmUser', JSON.stringify(userData));
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userRole", selectedRole);
+        localStorage.setItem("userEmail", form.email.value);
+
+        // Redirect based on role
+        if (selectedRole === 'admin') {
+            window.location.href = "admin.html";
+        } else if (selectedRole === 'beautician') {
+            window.location.href = "beauticianspage.html";
+        } else {
+            window.location.href = "home.html";
+        }
+    });
+    </script>
+
+</body>
+</html>

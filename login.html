@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Maison De FFM</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-left">
+            <img src="assets/logo/FFM.png" alt="Maison De FFM Logo" class="login-logo">
+            <h1>MAISON DE FFM</h1>
+            <p>Premium Home Beauty & Wellness</p>
+        </div>
+        <div class="login-right">
+            <div class="login-box">
+                <h2>Welcome Back!</h2>
+                <p class="subtitle">Log in to access your account</p>
+                <form id="login-form">
+                    <input type="email" id="login-email" placeholder="Email Address" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <div class="select-wrapper account-type-wrapper">
+                        <select id="login-role" required>
+                            <option value="" disabled selected>Account Type</option>
+                            <option value="client">Client</option>
+                            <option value="beautician">Beautician</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="code-wrapper">
+                        <input type="text" id="login-code" placeholder="CODE (Required for Admin/Beautician)">
+                        <small class="code-note">Enter N/A or leave blank if Client</small>
+                    </div>
+                    <button type="submit" class="login-submit">LOG IN</button>
+                </form>
+                <div class="signup">
+                    Don't have an account? <a href="signup.html">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    const ADMIN_CODE = "FFMADMIN2025";
+    const BEAUTICIAN_CODE = "BEATICIANFFM2025";
+
+    const form = document.getElementById('login-form');
+    const roleSelect = document.getElementById('login-role');
+    const codeInput = document.getElementById('login-code');
+    const codeNote = document.querySelector('.code-note');
+
+    roleSelect.addEventListener('change', function () {
+        if (this.value === 'admin' || this.value === 'beautician') {
+            codeInput.required = true;
+            codeInput.placeholder = "CODE (Required)";
+            codeNote.style.opacity = "1";
+        } else {
+            codeInput.required = false;
+            codeInput.placeholder = "CODE (Optional - enter N/A)";
+            codeNote.style.opacity = "0.6";
+        }
+    });
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const role = roleSelect.value;
+        const code = codeInput.value.trim().toUpperCase();
+
+        if (!email || !password || !role) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        let isValidCode = false;
+        if (role === "admin" && code === ADMIN_CODE) isValidCode = true;
+        else if (role === "beautician" && code === BEAUTICIAN_CODE) isValidCode = true;
+        else if (role === "client") isValidCode = true;
+
+        if (!isValidCode) {
+            alert("Invalid code for the selected role.");
+            return;
+        }
+
+        const submitBtn = document.querySelector('.login-submit');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = "LOGGING IN...";
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email.toLowerCase(), password, role })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                const realRole = data.user?.role || role;
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userRole', realRole);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('isLoggedIn', 'true');
+
+                if (realRole === "admin") window.location.href = "admin.html";
+                else if (realRole === "beautician") window.location.href = "beautician.html";
+                else window.location.href = "home.html";
+            } else {
+                alert(data.message || 'Login failed');
+            }
+        } catch (error) {
+            alert('Backend not running. Check terminal.');
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Always clear any previous session when opening login page
+    (function () {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('isLoggedIn');
+        sessionStorage.clear();
+    })();
+</script>
+
+
+
+</body>
+</html>

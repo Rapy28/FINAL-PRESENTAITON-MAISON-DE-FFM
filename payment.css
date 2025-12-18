@@ -1,0 +1,115 @@
+
+.payment-hero {
+    text-align: center;
+    padding: 140px 20px 60px;
+}
+.payment-hero h1 {
+    font-size: 56px;
+    color: #ffdc5a;
+    letter-spacing: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 35px rgba(255,220,90,0.8);
+    margin-bottom: 12px;
+    animation: glow 3.5s ease-in-out infinite alternate;
+}
+.payment-hero p { font-size: 23px; color:#ffd6e8; letter-spacing:5px; font-style:italic; opacity:0.94; }
+@keyframes glow { from { text-shadow: 0 0 20px rgba(255,220,90,0.6); } to { text-shadow: 0 0 45px rgba(255,220,90,0.9); } }
+
+.payment-container {
+    max-width: 920px;
+    margin: 0 auto 120px;
+    padding: 65px 55px;
+    background: rgba(131,58,112,0.56);
+    backdrop-filter: blur(22px);
+    border-radius: 28px;
+    border: 1.5px solid rgba(255,220,90,0.28);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.55), 0 0 60px rgba(255,220,90,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.payment-container::before {
+    content: ""; position: absolute; inset: 0; border-radius: 28px;
+    background: linear-gradient(135deg, rgba(255,220,90,0.12), transparent 65%);
+    pointer-events: none;
+}
+
+.payment-summary {
+    background: rgba(255,255,255,0.09);
+    border-radius: 18px;
+    padding: 32px;
+    margin-bottom: 45px;
+    border: 1px solid rgba(255,220,90,0.35);
+    backdrop-filter: blur(8px);
+}
+.summary-title {
+    color:#ffdc5a; font-size:26px; letter-spacing:6px; text-align:center;
+    margin-bottom:22px; font-weight:bold; text-shadow:0 0 18px rgba(255,220,90,0.7);
+}
+.summary-item {
+    display:flex; justify-content:space-between; font-size:17px;
+    letter-spacing:2.2px; color:#ffd6e8; margin-bottom:14px;
+}
+.summary-total {
+    font-size:22px; font-weight:bold; color:#ffdc5a; margin-top:18px;
+    padding-top:18px; border-top:2px solid rgba(255,220,90,0.4);
+    text-shadow:0 0 12px rgba(255,220,90,0.5);
+}
+
+.payment-methods { display:grid; gap:18px; margin-bottom:35px; }
+.payment-method {
+    display:flex; align-items:center; padding:18px 22px;
+    background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,220,90,0.25);
+    border-radius:16px; cursor:pointer; transition:0.4s; position:relative;
+}
+.payment-method input[type="radio"] { position:absolute; opacity:0; }
+.payment-method:hover, .payment-method.selected {
+    border-color:#ffdc5a; background:rgba(255,220,90,0.14);
+    box-shadow:0 0 25px rgba(255,220,90,0.35); transform:translateY(-3px);
+}
+.payment-icon { width:50px; height:50px; margin-right:12px; object-fit:contain; transition:0.3s; }
+.payment-method:hover .payment-icon, .payment-method.selected .payment-icon { transform:scale(1.15); }
+.payment-method span { font-size:17px; letter-spacing:2.5px; color:white; font-weight:500; }
+
+.payment-info { display:none; background:rgba(255,255,255,0.07); padding:25px;
+    border-radius:16px; border:1px solid rgba(255,220,90,0.35); margin-top:20px; }
+.payment-info.active { display:block; animation:fadeIn 0.5s; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.form-group { margin-bottom:22px; }
+.form-group label { display:block; color:#ffd6e8; font-size:14px; letter-spacing:3.5px; margin-bottom:10px; }
+.form-group input {
+    width:100%; padding:16px 20px; background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,220,90,0.4); border-radius:14px; color:white;
+    font-size:16px; transition:0.4s;
+}
+.form-group input:focus {
+    border-color:#ffdc5a; background:rgba(255,220,90,0.15);
+    box-shadow:0 0 25px rgba(255,255,220,90,0.4); outline:none;
+}
+
+.confirm-btn {
+    display:block; width:fit-content; min-width:420px; margin:40px auto 0;
+    padding:22px 60px; background:linear-gradient(135deg,#ffdc5a,#f5c147);
+    color:#2a0e3b; font-size:22px; font-weight:bold; letter-spacing:8px;
+    border:none; border-radius:60px; cursor:pointer; transition:0.5s;
+    box-shadow:0 12px 45px rgba(255,220,90,0.6); position:relative; overflow:hidden;
+}
+.confirm-btn:hover {
+    transform:translateY(-10px); background:linear-gradient(135deg,#ffed99,#ffd700);
+    box-shadow:0 25px 70px rgba(255,220,90,0.9);
+}
+.confirm-btn::before {
+    content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+    transition:0.8s;
+}
+.confirm-btn:hover::before { left:100%; }
+
+@media(max-width:768px){
+    .payment-container{padding:50px 30px;}
+    .confirm-btn{min-width:320px; font-size:19px;}
+}
+@media(max-width:480px){
+    .confirm-btn{min-width:280px; padding:18px 30px;}
+    .payment-method span{font-size:16px;}
+}

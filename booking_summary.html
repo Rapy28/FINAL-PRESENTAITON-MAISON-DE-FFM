@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | Maison De FFM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:"Playfair Display",serif; }
+        body {
+            background: url("assets/background/welcome.png") center/cover fixed;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .receipt-box {
+            background: rgba(0,0,0,0.38);
+            backdrop-filter: blur(14px);
+            padding: 55px 70px;
+            border-radius: 28px;
+            max-width: 540px;
+            box-shadow: 0 20px 60px rgba(255,220,90,0.5);
+            border: 1.5px solid rgba(255,220,90,0.3);
+        }
+        h1 {
+            font-size: 48px;
+            color: #ffdc5a;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 30px rgba(255,220,90,0.9);
+        }
+        p { font-size: 22px; color:#ffd6e8; margin: 20px 0 40px; font-style:italic; }
+        .summary-box {
+            background: rgba(255,255,255,0.08);
+            padding: 28px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(255,220,90,0.4);
+        }
+        .summary-box h2 {
+            color:#ffdc5a; font-size:24px; letter-spacing:3px; margin-bottom:20px;
+            text-shadow:0 0 15px rgba(255,220,90,0.6);
+        }
+        .summary-item {
+            display:flex; justify-content:space-between; margin:14px 0; font-size:17px;
+        }
+        .label { color:#ffd6e8; letter-spacing:1.8px; }
+        .value { color:white; font-weight:600; max-width:60%; text-align:right; }
+        .btn {
+            padding:18px 55px;
+            margin:12px;
+            border-radius:50px;
+            font-size:19px;
+            letter-spacing:4px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:all 0.5s ease;
+            min-width:260px;
+        }
+        .pay-btn {
+            background:#ffdc5a; color:#2a0033; border:none;
+            box-shadow:0 10px 40px rgba(255,220,90,0.6);
+        }
+        .pay-btn:hover { background:#ffed99; transform:translateY(-7px); box-shadow:0 20px 50px rgba(255,220,90,0.8); }
+        .home-btn {
+            background:transparent; border:2.5px solid #ffd6e8; color:#ffd6e8;
+        }
+        .home-btn:hover { background:rgba(255,214,232,0.15); transform:translateY(-5px); }
+        @media(max-width:480px){
+            .receipt-box{padding:40px 30px;} h1{font-size:38px;} .btn{min-width:100%;margin:10px 0;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt-box">
+    <h1>Booking Confirmed!</h1>
+    <p>Your luxury home service is officially scheduled</p>
+
+    <div class="summary-box">
+        <h2>Appointment Details</h2>
+
+        <div class="summary-item"><span class="label">Services</span><span class="value" id="services">—</span></div>
+        <div class="summary-item"><span class="label">Date & Time</span><span class="value" id="datetime">—</span></div>
+        <div class="summary-item"><span class="label">Beautician</span><span class="value" id="beautician">—</span></div>
+        <div class="summary-item"><span class="label">Location</span><span class="value">Home Service</span></div>
+        <div class="summary-item"><span class="label">Total Amount</span><span class="value" style="color:#ffdc5a;font-size:20px">₱<span id="total">0</span></span></div>
+    </div>
+
+    <button onclick="location.href='payment.html'" class="btn pay-btn">PROCEED TO PAYMENT</button>
+    <button onclick="location.href='home.html'" class="btn home-btn">BACK TO HOME</button>
+</div>
+
+<script>
+    const data = JSON.parse(localStorage.getItem("bookingData"));
+    if (!data) {
+        alert("No booking found!");
+        location.href = "booking.html";
+    } else {
+        document.getElementById("services").textContent = data.services.join(" • ") || "Standard Session";
+        document.getElementById("datetime").textContent = `${data.date} • ${data.time}`;
+        document.getElementById("beautician").textContent = data.beautician || "To be assigned";
+        document.getElementById("total").textContent = data.totalPrice.toLocaleString();
+    }
+</script>
+
+</body>
+</html>

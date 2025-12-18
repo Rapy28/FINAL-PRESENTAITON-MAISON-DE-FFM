@@ -1,0 +1,119 @@
+body {
+  background: url("assets/background/bg1.png") center/cover fixed;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+.safety-container {
+  max-width: 700px;
+  margin: 60px auto;
+  background: rgba(131, 58, 112, 0.85);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(131,58,112,0.25);
+  padding: 40px 30px 30px 30px;
+  text-align: center;
+  border: 2px solid #ffdc5a44;
+}
+.safety-header {
+  margin-bottom: 30px;
+}
+.safety-header h1 {
+  font-size: 2.2em;
+  color: #ffdc5a;
+  margin-bottom: 6px;
+}
+.safety-header p {
+  color: #ffd6e8;
+  font-size: 1.1em;
+  margin-bottom: 2px;
+}
+.safety-form {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px 18px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.safety-form label {
+  color: #ffdc5a;
+  font-weight: bold;
+  display: block;
+  margin-top: 16px;
+}
+.safety-form input, .safety-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffdc5a44;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 1em;
+  background: rgba(255,255,255,0.13);
+  color: #fff;
+}
+
+.safety-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffdc5a44;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 1.08em;
+  background: rgba(255,255,255,0.13);
+  color: #2a0033;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.safety-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.safety-form button {
+  background: linear-gradient(135deg, #ffdc5a, #a64d8a);
+  color: #2a0033;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 38px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 18px;
+  box-shadow: 0 6px 24px rgba(255,220,90,0.18);
+  transition: all 0.3s;
+}
+.safety-form button:hover {
+  background: linear-gradient(135deg, #a64d8a, #ffdc5a);
+  color: #fff;
+}
+.safety-list {
+  margin-top: 30px;
+  text-align: left;
+}
+.safety-list h2 {
+  color: #ffdc5a;
+  margin-bottom: 10px;
+}
+.safety-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 18px 16px;
+  margin-bottom: 16px;
+  border-left: 5px solid #ffdc5a;
+}
+.safety-item .type {
+  font-weight: bold;
+  color: #ffdc5a;
+}
+.safety-item .date {
+  color: #ffd6e8;
+  font-size: 0.98em;
+  margin-bottom: 6px;
+}
+.safety-item .desc {
+  color: #fff;
+  margin-top: 4px;
+}

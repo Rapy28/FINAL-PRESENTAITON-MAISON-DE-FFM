@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Maison De FFM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="booking.css">
+    <style>
+        body { 
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
+                        url('assets/background/welcome.png') center/cover no-repeat fixed; 
+            color: white; 
+            min-height: 100vh; 
+            margin: 0;
+        }
+        .thankyou-container { max-width: 900px; margin: 40px auto; text-align: center; padding: 60px 20px; }
+        .thankyou-container h1 { font-family: 'Playfair Display', serif; font-size: 58px; margin-bottom: 20px; color: #ffdc5a; text-shadow: 0 0 30px rgba(255,220,90,0.8); }
+        .thankyou-container p { font-size: 22px; line-height: 1.8; margin: 20px 0; opacity: 0.95; }
+        .highlight { color: #ffdc5a; font-weight: bold; }
+        .whatsapp-btn {
+            display: inline-block; margin: 40px 0; padding: 16px 40px;
+            background: #25D366; color: white; font-size: 20px; font-weight: bold;
+            border-radius: 50px; text-decoration: none; box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+        }
+        .whatsapp-btn:hover { transform: scale(1.05); background: #128C7E; }
+        .confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="assets/logo/FFM.png" alt="Maison De FFM Logo">
+            <div class="nav-title">MAISON DE FFM</div>
+        </div>
+        <div class="nav-center">
+            <a href="home.html">HOME</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="services.html">SERVICES</a>
+            <a href="promos.html">PROMOS</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+        <a href="booking.html" class="book-btn">BOOK NOW!</a>
+    </nav>
+
+    <!-- GOLD CONFETTI -->
+    <div class="confetti" id="confetti"></div>
+
+    <div class="thankyou-container">
+        <h1>Thank You!</h1>
+        <p>Your appointment has been <span class="highlight">successfully booked</span> with Maison De FFM.</p>
+        <p>We’ve sent all the details to your phone & email.<br>
+        Your beautician will arrive on <span class="highlight" id="booking-date"></span> at <span class="highlight" id="booking-time"></span>.</p>
+        <p>Relax, glow, and get ready to feel like royalty — because you deserve nothing less.</p>
+
+        <p style="margin-top: 50px; font-size: 18px; opacity: 0.9;">
+            See you soon!
+        </p>
+    </div>
+
+    <!-- CONFETTI SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const confettiCanvas = document.getElementById('confetti');
+        const confettiSettings = { 
+            particleCount: 150, 
+            spread: 70, 
+            origin: { y: 0.6 },
+            colors: ['#ffdc5a', '#ffd700', '#f0e68c', '#fff', '#ff69b4']
+        };
+        
+        const burst = setInterval(() => {
+            confetti(Object.assign({}, confettiSettings, { origin: { x: Math.random(), y: Math.random() * 0.4 } }));
+        }, 700);
+
+        setTimeout(() => clearInterval(burst), 8000);
+        setTimeout(() => {
+            confetti({ particleCount: 300, spread: 120, origin: { y: 0.5 } });
+        }, 4000);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const data = JSON.parse(localStorage.getItem("bookingData") || "{}");
+            if (data.date) document.getElementById("booking-date").textContent = new Date(data.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            if (data.time) document.getElementById("booking-time").textContent = data.time;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile – Maison De FFM</title>
+    <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <div class="navbar">
+        <div class="nav-left">
+            <img src="assets/logo/FFM.png" alt="Maison De FFM Logo">
+            <h2 class="nav-title">MAISON DE FFM</h2>
+        </div>
+        <div class="nav-center">
+            <a href="home.html">HOME</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="services.html">SERVICES</a>
+            <a href="promos.html">PROMOS</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+        <a href="booking.html" class="book-btn">BOOK NOW!</a>
+    </div>
+
+    <!-- USER PROFILE PAGE WRAPPER -->
+    <div class="profile-page">
+
+        <!-- Header -->
+        <header class="profile-header">
+            <h1>My Profile</h1>
+            <p>Manage your beauty & wellness bookings at home.</p>
+        </header>
+
+        <!-- User Information -->
+        <section class="profile-section user-info">
+            <h2>User Information</h2>
+            <div class="field">
+                <label>Full Name</label>
+                <span id="profile-name">Guest</span>
+            </div>
+            <div class="field">
+                <label>Birthdate</label>
+                <span id="profile-birthday">N/A</span>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <span id="profile-email">N/A</span>
+            </div>
+            <div class="field">
+                <label>Phone Number</label>
+                <span id="profile-phone">N/A</span>
+            </div>
+            <div class="field">
+                <label>Address</label>
+                <span id="profile-address">N/A</span>
+            </div>
+        </section>
+
+        <!-- Appointment Tracker -->
+        <section class="profile-section appointments">
+            <h2>Appointment Tracker</h2>
+            <ul class="appointment-list" id="appointment-list">
+                <li style="text-align: center; color: #ccc; padding: 20px;">No appointments yet</li>
+            </ul>
+        </section>
+
+        <!-- Transaction History -->
+        <section class="profile-section transactions">
+            <h2>Transaction History</h2>
+            <ul class="transaction-list" id="transaction-list">
+                <li style="text-align: center; color: #ccc; padding: 20px;">No transactions yet</li>
+            </ul>
+        </section>
+
+
+        <!-- Safety Reports Button -->
+        <div style="text-align:center; margin: 24px 0;">
+            <a href="safety_reports.html" class="safety-btn" style="display:inline-block;padding:12px 24px;background:#007bff;color:#fff;border-radius:5px;text-decoration:none;">View Safety Reports</a>
+        </div>
+
+        <!-- Logout Button -->
+        <footer class="profile-footer">
+            <button class="logout-btn" onclick="logout()">LOG OUT</button>
+        </footer>
+
+    </div>
+
+    <script>
+        // Redirect to login if not logged in
+        if (!localStorage.getItem("isLoggedIn")) {
+            window.location.href = "login.html";
+        }
+
+        // Load User Information
+        const storedUser = localStorage.getItem('mdffmUser');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            document.getElementById('profile-name').textContent = user.name || 'Guest';
+            document.getElementById('profile-email').textContent = user.email || 'N/A';
+            document.getElementById('profile-phone').textContent = user.phone || 'N/A';
+            document.getElementById('profile-address').textContent = user.address || 'N/A';
+
+            if (user.birthday) {
+                const date = new Date(user.birthday);
+                document.getElementById('profile-birthday').textContent =
+                    date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+        }
+
+        // Load Bookings (Appointments & Transactions)
+        const storedBooking = localStorage.getItem('bookingData');
+        const apptList = document.getElementById('appointment-list');
+        const txList = document.getElementById('transaction-list');
+
+        if (storedBooking) {
+            let bookings = JSON.parse(storedBooking);
+            if (!Array.isArray(bookings)) bookings = [bookings]; // Handle single booking
+
+            apptList.innerHTML = '';
+            txList.innerHTML = '';
+
+            bookings.forEach(booking => {
+                const servicesText = booking.services?.join(', ') || 'No services selected';
+
+                // Appointment Item
+                apptList.innerHTML += `
+                    <li class="appointment-item">
+                        <div class="appointment-main">
+                            <h3>${servicesText}</h3>
+                            <p>Beautician: ${booking.beautician || 'To be assigned'}</p>
+                        </div>
+                        <div class="appointment-meta">
+                            <p>${booking.date || '—'} • ${booking.time || '—'}</p>
+                            <span class="status status-upcoming">${booking.status || 'Upcoming'}</span>
+                        </div>
+                    </li>
+                `;
+
+                // Transaction Item
+                txList.innerHTML += `
+                    <li class="transaction-item">
+                        <div class="transaction-main">
+                            <h3>${servicesText}</h3>
+                            <p>${booking.date || '—'} • Home Service</p>
+                        </div>
+                        <div class="transaction-meta">
+                            <p class="amount">₱${(booking.totalPrice || 0).toLocaleString()}</p>
+                            <span class="status ${booking.paymentStatus === 'Paid' ? 'status-paid' : 'status-pending'}">
+                                ${booking.paymentStatus || 'Pending'}
+                            </span>
+                        </div>
+                    </li>
+                `;
+            });
+        }
+
+        // Logout Function
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("userRole");
+            localStorage.removeItem("userEmail");
+            // Optional: clear user data if desired
+            // localStorage.removeItem("mdffmUser");
+            // localStorage.removeItem("bookingData");
+
+            alert("You have been logged out successfully.");
+            window.location.href = "login.html";
+        }
+    </script>
+<script src="auth-session.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.replace('login.html');
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      console.error('Failed to load profile', data);
+      return;
+    }
+
+    const user = data.user || {};
+
+    document.getElementById('profile-name').textContent =
+      user.name || 'Guest';
+
+    document.getElementById('profile-email').textContent =
+      user.email || 'N/A';
+
+    document.getElementById('profile-phone').textContent =
+      user.phone || 'N/A';
+
+    document.getElementById('profile-birthdate').textContent =
+      user.birthdate ? new Date(user.birthdate).toLocaleDateString() : 'N/A';
+
+    document.getElementById('profile-address').textContent =
+      user.address || '';
+  } catch (err) {
+    console.error('Profile load error', err);
+  }
+});
+</script>
+</body>
+</html>
+
+</body>
+</html>

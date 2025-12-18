@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety & Accident Reports</title>
+  <link rel="stylesheet" href="safety_reports.css">
+</head>
+<body>
+  <div class="safety-container">
+    <div class="safety-header">
+      <h1>Safety & Accident Reports</h1>
+      <p>Report and review safety or accident incidents for Maison De FFM operations.</p>
+      <a href="home.html" style="display:inline-block;padding:12px 24px;background:#007bff;color:#fff;border-radius:5px;text-decoration:none;">Back to Home</a>
+    </div>
+    <div class="safety-list">
+      <h2>Submitted Reports</h2>
+      <table id="safety-table">
+        <thead>
+          <tr>
+            <th>Submitted By</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="safety-form">
+      <h2>Submit a Report</h2>
+      <form id="add-safety-form">
+        <label for="submittedBy">Submitted By</label>
+        <input type="text" name="submittedBy" id="submittedBy" placeholder="User ID or Name" required>
+        <label for="reportType">Report Type</label>
+        <select name="reportType" id="reportType" required>
+          <option value="safety">Safety</option>
+          <option value="accident">Accident</option>
+        </select>
+        <label for="description">Description</label>
+        <textarea name="description" id="description" placeholder="Describe the incident..." required></textarea>
+        <button type="submit">Submit Report</button>
+      </form>
+    </div>
+  </div>
+  <script src="safety_reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Playfair Display", serif; }
+body {
+    background-image: url('assets/background/all.png');
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+
+.navbar {
+    width: 100%; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center;
+    position: fixed; top: 0; left: 0; background: rgba(131,58,112,0.85); backdrop-filter: blur(10px);
+    z-index: 999; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.nav-left { display: flex; align-items: center; gap: 15px; }
+.nav-left img { height: 55px; filter: drop-shadow(0 0 12px rgba(255,220,90,0.7)); }
+.nav-title { color: #ffdc5a; font-size: 28px; letter-spacing: 4px; font-weight: bold; }
+.nav-center a { margin: 0 20px; color: white; font-size: 18px; letter-spacing: 3px; text-decoration: none; transition: 0.3s; }
+.nav-center a:hover, .nav-center a.active { color: #ffd6e8; }
+.book-btn {
+    background: linear-gradient(135deg, #f08bb6, #e76fa3); padding: 12px 32px; color: white;
+    border-radius: 30px; letter-spacing: 2px; font-weight: bold; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(240,139,182,0.4); transition: all 0.3s;
+}
+.book-btn:hover { background: linear-gradient(135deg, #ffaccf, #ff8bb9); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(240,139,182,0.6); }
+
+
+.promos-container {
+    padding: 180px 20px 150px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    align-items: center;
+}
+
+.promo-panel {
+    background: rgba(0,0,0,0.35);
+    padding: 60px 80px;
+    border-radius: 35px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    transition: transform 0.4s ease;
+}
+
+.promo-panel:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 60px rgba(240,139,182,0.35);
+}
+
+.promo-title {
+    font-size: 90px;
+    color: #ffdc5a;
+    text-shadow: 0 0 60px rgba(255,220,90,1);
+    margin-bottom: 25px;
+    letter-spacing: 4px;
+}
+.glow { text-shadow: 0 0 70px rgba(255,220,90,1); }
+
+.discount {
+    font-size: 170px;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+    margin: 20px 0;
+}
+.discount span {
+    font-size: 130px;
+    color: #ffdc5a;
+    text-shadow: 0 0 50px rgba(255,220,90,0.9);
+}
+
+.description {
+    font-size: 48px;
+    letter-spacing: 6px;
+    margin: 30px 0 40px;
+    opacity: 0.95;
+}
+
+.tnc {
+    font-size: 22px;
+    opacity: 0.7;
+    letter-spacing: 3px;
+}
+
+
+@media (max-width: 768px) {
+    
+    .promos-container { padding: 140px 20px 100px; gap: 80px; }
+    .promo-panel { padding: 50px 40px; }
+    .promo-title { font-size: 60px; }
+    .discount { font-size: 120px; }
+    .discount span { font-size: 90px; }
+    .description { font-size: 32px; }
+    .tnc { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+    .promo-title { font-size: 52px; }
+    }
+    .discount { font-size: 100px; }
+    .discount span { font-size: 80px; }
+    .description { font-size: 28px; }
+
+
+.logout-btn {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid #ffdc5a;
+    color: #ffdc5a;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 220, 90, 0.3);
+    color: white;
+    border-color: white;
+    box-shadow: 0 8px 25px rgba(255, 220, 90, 0.5);
+    transform: translateY(-3px);
+}
+

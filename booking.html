@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Session | Maison De FFM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="assets/logo/FFM.png" alt="Maison De FFM Logo">
+            <div class="nav-title">MAISON DE FFM</div>
+        </div>
+        <div class="nav-center">
+            <a href="home.html">HOME</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="services.html">SERVICES</a>
+            <a href="promos.html">PROMOS</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+        <a href="booking.html" class="book-btn">BOOK NOW!</a>
+    </nav>
+
+    <div class="booking-hero">
+        <h1>BOOK YOUR SESSION!</h1>
+        <p>Elegance delivered to your doorstep</p>
+    </div>
+
+    <div class="booking-container">
+
+        <!-- FORM -->
+        <form onsubmit="goToPayment(event)">
+
+            <div class="form-group"><label>FULL NAME</label><input type="text" name="Full Name" required placeholder="Your full name"></div>
+            
+            <!-- PHONE NUMBER -->
+            <div class="form-group">
+                <label>PHONE NUMBER</label>
+                <input type="tel" name="Phone" required placeholder="09xxxxxxxxx" maxlength="11" inputmode="numeric"
+                       pattern="09[0-9]{9}" title="Must be 11 digits starting with 09">
+            </div>
+            
+            <div class="form-group"><label>EMAIL</label><input type="email" name="Email" required placeholder="you@domain.com"></div>
+
+            <!-- PREFERRED DATE -->
+            <div class="form-group">
+                <label>PREFERRED DATE</label>
+                <input type="date" name="Date" required min="2025-01-01" max="2030-12-31">
+            </div>
+
+            <div class="form-group">
+                <label>TIME SLOT</label>
+                <select name="Time Slot" required>
+                    <option value="" disabled selected>Select your preferred time</option>
+                    <option>10:00 am</option>
+                    <option>11:00 am</option>
+                    <option>12:00 pm</option>
+                    <option>1:00 pm</option>
+                    <option>2:00 pm</option>
+                    <option>3:00 pm</option>
+                    <option>4:00 pm</option>
+                    <option>5:00 pm</option>
+                    <option>6:00 pm</option>
+                </select>
+            </div>
+
+<!-- SERVICES -->
+<div class="form-group full">
+    <label>SERVICES & DURATION</label>
+    
+    <div class="services-accordion">
+
+        <!-- MASSAGE CATEGORY -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>MASSAGE</span>
+                <span class="accordion-icon">∨</span>
+            </div>
+            <div class="accordion-content">
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="500" data-name="Ventosa Massage (1 Hour)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Ventosa Massage — 1 Hour — ₱500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="400" data-name="Swedish Massage (1 Hour)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Swedish Massage — 1 Hour — ₱400</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="400" data-name="Traditional Hilot (1 Hour)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Traditional Hilot — 1 Hour — ₱400</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="300" data-name="Half Body Massage (1 Hour)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Half Body Massage — 1 Hour — ₱300</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="250" data-name="Foot Massage (1 Hour)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Foot Massage — 1 Hour — ₱250</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="250" data-name="Back Massage (30 mins)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Back Massage — 30 mins — ₱250</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="250" data-name="Facial Massage (30 mins)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Facial Massage — 30 mins — ₱250</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- NAILS CATEGORY -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>NAILS</span>
+                <span class="accordion-icon">∨</span>
+            </div>
+            <div class="accordion-content">
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1500" data-name="Regular Manicure">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Regular Manicure — ₱1,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="3500" data-name="Manicure with Nail Extensions">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Manicure with Nail Extensions — ₱3,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1000" data-name="Manicure (18 & below)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Manicure (18 & below) — ₱1,000</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1500" data-name="Regular Pedicure">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Regular Pedicure — ₱1,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1000" data-name="Pedicure (18 & below)">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Pedicure (18 & below) — ₱1,000</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- WAXING CATEGORY -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>WAXING</span>
+                <span class="accordion-icon">∨</span>
+            </div>
+            <div class="accordion-content">
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2000" data-name="Eyebrows & Mouth Waxing">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Eyebrows & Mouth — ₱2,000</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2500" data-name="Arms Waxing">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Arms — ₱2,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="3500" data-name="Legs Waxing">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Legs — ₱3,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2613" data-name="Full Face Waxing">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Full Face — ₱2,613</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="8000" data-name="Full Body + Massage">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Full Body + Massage — ₱8,000</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- THREADING CATEGORY -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>THREADING</span>
+                <span class="accordion-icon">∨  </span>
+            </div>
+            <div class="accordion-content">
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="3000" data-name="Eyebrows Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Eyebrows — ₱3,000</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1500" data-name="Chin Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Chin — ₱1,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2000" data-name="Neck Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Neck — ₱2,000</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="1500" data-name="Upper Lip Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Upper Lip — ₱1,500</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2000" data-name="Side Burns Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Side Burns — ₱2,000</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="2678" data-name="Forehead Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Forehead — ₱2,678</span>
+                </label>
+                <label class="service-item">
+                    <input type="checkbox" name="services" value="6000" data-name="Full Face Threading">
+                    <span class="checkmark"></span>
+                    <span class="service-text">Full Face Threading — ₱6,000</span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    <small style="display:block; margin-top:18px; opacity:0.9; font-style:italic; letter-spacing:1px; text-align:center;">
+        Click categories to expand • Select multiple services • Home Service Fee ₱200 will be added
+    </small>
+</div>
+
+            <!-- BEAUTICIAN -->
+            <div class="form-group full">
+                <label>SELECT YOUR BEAUTICIAN</label>
+                <div class="beautician-grid">
+                    
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Anna" required>
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Anna</span>
+                            <span class="rating">5 stars 4.9</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Marie">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Marie</span>
+                            <span class="rating">5 stars 4.9</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Jessa">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Jessa</span>
+                            <span class="rating">5 stars 5.0</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Clara">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Clara</span>
+                            <span class="rating">5 stars 4.8</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Sophia">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Sophia</span>
+                            <span class="rating">5 stars 4.9</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Rica">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Rica</span>
+                            <span class="rating">5 stars 5.0</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Ella">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Ella</span>
+                            <span class="rating">5 stars 5.0</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Leo">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Leo</span>
+                            <span class="rating">5 stars 5.0</span>
+                        </div>
+                    </label>
+
+                    <label class="beautician-item">
+                        <input type="radio" name="Beautician" value="Marco">
+                        <span class="radio-mark"></span>
+                        <div class="beautician-info">
+                            <span class="name">Marco</span>
+                            <span class="rating">5 stars 4.9</span>
+                        </div>
+                    </label>
+
+                </div>
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="form-group full">
+                <label>FULL ADDRESS (Home Service)</label>
+                <input type="text" name="Address" required placeholder="House #, Street, Barangay, City, Landmark">
+            </div>
+
+            <!-- NOTES -->
+            <div class="form-group full">
+                <label>SPECIAL REQUESTS OR NOTES</label>
+                <textarea rows="4" name="Special Requests" placeholder="Allergies • Preferred pressure • Scent • etc."></textarea>
+            </div>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="submit-btn">SECURE MY APPOINTMENT</button>
+        </form>
+
+        <p style="text-align:center; margin-top: 30px; font-size:14px; opacity:0.8; letter-spacing:2px;">
+            Home Service Fee: ₱200 will be added automatically
+        </p>
+    </div>
+
+<script>
+    // PHONE 
+    document.querySelector('input[name="Phone"]').addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '');           // Remove non-digits
+        if (v && v[0] !== '9') v = '9' + v.substring(1); // Force start with 9
+        if (v.length >= 2) v = '09' + v.substring(2);    // Force 09 prefix
+        this.value = v.substring(0, 11);                 // Max 11 digits
+    });
+
+    // Auto-add "09" when field is clicked
+    document.querySelector('input[name="Phone"]').addEventListener('focus', function() {
+        if (!this.value) this.value = '09';
+    });
+
+
+function toggleAccordion(header) {
+    const content = header.nextElementSibling;
+    const isOpen = content.classList.contains("open");
+
+    document.querySelectorAll(".accordion-content").forEach(item => {
+        item.classList.remove("open");
+        item.previousElementSibling.classList.remove("active");
+    });
+
+    if (!isOpen) {
+        content.classList.add("open");
+        header.classList.add("active");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const firstHeader = document.querySelector(".accordion-header");
+    if (firstHeader) {
+        firstHeader.click();
+    }
+    updateTotalPrice();
+});
+
+function updateTotalPrice() {
+    const checked = document.querySelectorAll('input[name="services"]:checked');
+    let subtotal = 0;
+
+    checked.forEach(cb => {
+        subtotal += parseInt(cb.value);
+    });
+
+    const total = subtotal + 200;
+
+    let totalEl = document.getElementById("live-total");
+    if (!totalEl) {
+        totalEl = document.createElement("div");
+        totalEl.id = "live-total";
+        totalEl.style.cssText = `
+            text-align: center;
+            margin: 25px 0 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffdc5a;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 220, 90, 0.6);
+        `;
+        document.querySelector(".submit-btn").before(totalEl);
+    }
+
+    totalEl.textContent = `TOTAL: ₱${total.toLocaleString()}`;
+    if (subtotal === 0) {
+        totalEl.textContent += " (Home Service Fee ₱200)";
+    }
+}
+
+document.querySelectorAll('input[name="services"]').forEach(checkbox => {
+    checkbox.addEventListener("change", updateTotalPrice);
+});
+
+function goToPayment(event) {
+    event.preventDefault();
+
+    const selectedServices = document.querySelectorAll('input[name="services"]:checked');
+
+    if (selectedServices.length === 0) {
+        alert("Please select at least one service.");
+        return;
+    }
+
+    const servicesList = [];
+    let totalPrice = 200;
+
+    selectedServices.forEach(service => {
+        const price = parseInt(service.value);
+        const name = service.getAttribute("data-name");
+        servicesList.push(name);
+        totalPrice += price;
+    });
+
+    const form = document.querySelector("form");
+    const data = {
+        fullName: form.querySelector('input[name="Full Name"]').value.trim(),
+        phone: form.querySelector('input[name="Phone"]').value.trim(),
+        email: form.querySelector('input[name="Email"]').value.trim(),
+        date: form.querySelector('input[name="Date"]').value,
+        time: form.querySelector('select[name="Time Slot"]').value,
+        services: servicesList,
+        totalPrice: totalPrice,
+        beautician: form.querySelector('input[name="Beautician"]:checked')?.value || '',
+        address: form.querySelector('input[name="Address"]').value.trim(),
+        notes: form.querySelector('textarea[name="Special Requests"]').value.trim() || "None"
+    };
+
+    localStorage.setItem("bookingData", JSON.stringify(data));
+    window.location.href = "booking_summary.html";
+}
+</script>
+
+</body>
+</html>

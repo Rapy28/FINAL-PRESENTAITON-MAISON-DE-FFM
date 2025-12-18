@@ -1,0 +1,94 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+}
+
+body {
+    background-image: url("assets/background/welcome.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+
+.front-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.front-container h1 {
+    font-size: 42px;
+    color: #ffd6e8;
+    letter-spacing: 8px;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.front-container h2 {
+    font-size: 100px;
+    color: #ffdc5a;
+    letter-spacing: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 30px rgba(255, 220, 90, 0.8);
+    margin: 10px 0;
+}
+
+.front-container h3 {
+    font-size: 26px;
+    letter-spacing: 6px;
+    color: white;
+    opacity: 0.9;
+    margin-bottom: 60px;
+}
+
+
+.enter-btn {
+    padding: 16px 50px;
+    background: transparent;
+    border: 2px solid #ffdc5a;
+    color: #ffdc5a;
+    font-size: 20px;
+    letter-spacing: 6px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(255, 220, 90, 0.3);
+}
+
+.enter-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 220, 90, 0.3), rgba(240, 139, 182, 0.3));
+    color: white;
+    border-color: white;
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(255, 220, 90, 0.5);
+}
+
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 30px;
+    }
+    .nav-left img { height: 45px; }
+    .nav-title { font-size: 24px; }
+    .nav-center a { font-size: 16px; margin: 0 12px; }
+    .book-btn { padding: 10px 22px; font-size: 15px; }
+
+    .front-container h1 { font-size: 32px; letter-spacing: 6px; }
+    .front-container h2 { font-size: 68px; letter-spacing: 6px; }
+    .front-container h3 { font-size: 20px; letter-spacing: 4px; margin-bottom: 50px; }
+    .enter-btn { padding: 14px 40px; font-size: 18px; }
+}

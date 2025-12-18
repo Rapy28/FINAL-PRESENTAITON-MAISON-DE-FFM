@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautician Dashboard | Maison De FFM</title>
+    <link rel="stylesheet" href="beauticianspage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="beautician-body">
+
+    <!-- Floating Logout Button -->
+    <a href="login.html" class="floating-logout-btn">LOG OUT</a>
+
+    <!-- Main Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome, Beautician!</h1>
+            <p class="welcome-text">Manage your schedule, inventory, and appointments</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Upcoming Appointments -->
+            <div class="card appointments-card">
+                <h3>Today's Appointments</h3>
+                <div class="appointment-list" id="appointment-list">
+                    <p class="no-data">No appointments scheduled today.</p>
+                </div>
+                <button class="view-all-btn">View Full Schedule</button>
+            </div>
+
+            <!-- Quick Actions (Reduced) -->
+            <div class="card actions-card">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <a href="#" class="action-btn">Mark Service Complete</a>
+                </div>
+            </div>
+
+            <!-- Profile Summary (No Specialty/Rating) -->
+            <div class="card profile-card">
+                <h3>Your Profile</h3>
+                <div class="profile-info">
+                    <img src="assets/logo/FFM.png" alt="Profile" class="profile-img">
+                    <p><strong>Name:</strong> <span id="beautician-name">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="beautician-email">Loading...</span></p>
+                    <p><strong>Rating:</strong> <span id="beautician-rating">Not rated yet</span></p>
+                </div>
+                <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+
+            <!-- Client Tracker -->
+            <div class="card tracker-card">
+                <h3>Client Tracker</h3>
+                <p>Help clients track your arrival in real-time</p>
+                <a href="#" class="tracker-btn">START TRACKER</a>
+            </div>
+
+            <!-- Inventory Section with Functional Manage Button -->
+            <div class="card inventory-card">
+                <h3>Inventory</h3>
+                <p class="inventory-desc">Track your beauty products and tools</p>
+                <div class="inventory-list" id="inventory-list">
+                    <!-- Items will be loaded by JS -->
+                </div>
+                <button class="manage-inventory-btn" id="open-inventory-modal">Manage Inventory</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Modal -->
+    <div class="modal-overlay" id="inventory-modal">
+        <div class="modal-content">
+            <h3>Manage Your Inventory</h3>
+            <div id="modal-inventory-list"></div>
+            <button class="close-modal" id="close-modal">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load user data
+            const userData = JSON.parse(localStorage.getItem('mdffmUser') || '{}');
+            const userEmail = localStorage.getItem('userEmail') || 'beautician@ffm.com';
+            const beauticianRating = localStorage.getItem('beauticianRating') || 'Not rated yet';
+
+            document.getElementById('beautician-name').textContent = userData.name || 'Beautician';
+            document.getElementById('beautician-email').textContent = userEmail;
+            document.getElementById('beautician-rating').textContent = beauticianRating;
+
+            // Default inventory items
+            const defaultInventory = [
+                { name: "Honey Wax", status: "in-stock" },
+                { name: "Paper Wax", status: "in-stock" },
+                { name: "Nail Polish Set", status: "low-stock" },
+                { name: "Healing Massage Oil", status: "low-stock" },
+                { name: "Threading Thread", status: "out-stock" }
+            ];
+
+            let inventory = JSON.parse(localStorage.getItem('beauticianInventory')) || defaultInventory;
+
+            // Render inventory list
+            function renderInventory(targetId) {
+                const list = document.getElementById(targetId);
+                list.innerHTML = '';
+                inventory.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'inventory-item';
+                    div.innerHTML = `
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-status ${item.status}">${item.status.replace('-', ' ').toUpperCase()}</span>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+
+            renderInventory('inventory-list');
+
+            // Modal functionality
+            const modal = document.getElementById('inventory-modal');
+            const openBtn = document.getElementById('open-inventory-modal');
+            const closeBtn = document.getElementById('close-modal');
+
+            openBtn.onclick = () => {
+                renderInventory('modal-inventory-list');
+                modal.style.display = 'flex';
+            };
+
+            closeBtn.onclick = () => {
+                modal.style.display = 'none';
+            };
+
+            window.onclick = (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            };
+
+            // Allow updating status in modal (click to cycle)
+            document.getElementById('modal-inventory-list').addEventListener('click', (e) => {
+                if (e.target.classList.contains('item-status')) {
+                    const statuses = ['in-stock', 'low-stock', 'out-stock'];
+                    const current = e.target.classList[1];
+                    const nextIndex = (statuses.indexOf(current) + 1) % statuses.length;
+                    const newStatus = statuses[nextIndex];
+
+                    const itemName = e.target.previousElementSibling.textContent;
+                    const item = inventory.find(i => i.name === itemName);
+                    if (item) {
+                        item.status = newStatus;
+                        localStorage.setItem('beauticianInventory', JSON.stringify(inventory));
+                        renderInventory('inventory-list');
+                        renderInventory('modal-inventory-list');
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

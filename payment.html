@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | Maison De FFM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="assets/logo/FFM.png" alt="Logo">
+        <div class="nav-title">MAISON DE FFM</div>
+    </div>
+    <div class="nav-center">
+        <a href="home.html">HOME</a>
+        <a href="about.html">ABOUT US</a>
+        <a href="services.html">SERVICES</a>
+        <a href="promos.html">PROMOS</a>
+        <a href="booking.html" class="active">BOOKING</a>
+        <a href="contact.html">CONTACT US</a>
+    </div>
+    <a href="booking.html" class="book-btn">BOOK NOW!</a>
+</nav>
+
+<div class="payment-hero">
+    <h1>SECURE PAYMENT</h1>
+    <p>Complete your payment to confirm your appointment</p>
+</div>
+
+<div class="payment-container">
+
+    <div class="payment-summary">
+        <h2 class="summary-title">BOOKING SUMMARY</h2>
+        <div id="services-list"></div>
+        <div class="summary-item" id="home-service-row">
+            <span>Home Service Fee</span>
+            <span>₱200</span>
+        </div>
+        <div class="summary-item summary-total">
+            <span>TOTAL TO PAY</span>
+            <span id="total-amount">₱0</span>
+        </div>
+    </div>
+
+    <div class="payment-methods">
+        <label class="payment-method selected" data-method="gcash">
+            <input type="radio" name="payment" value="gcash" checked>
+            <img src="assets/logo/gcashlogo.png" class="payment-icon">
+            <span>GCash</span>
+        </label>
+        <label class="payment-method" data-method="maya">
+            <input type="radio" name="payment" value="maya">
+            <img src="assets/logo/PayMaya_Logo.png" class="payment-icon">
+            <span>Maya</span>
+        </label>
+        <label class="payment-method" data-method="card">
+            <input type="radio" name="payment" value="card">
+            <img src="assets/logo/cardlogo.png" class="payment-icon">
+            <span>Credit / Debit Card</span>
+        </label>
+    </div>
+
+    <div id="gcash-info" class="payment-info active">
+        <div class="form-group"><label>GCASH NUMBER</label><input type="text" placeholder="09XXXXXXXXX" maxlength="11"></div>
+        <div class="form-group"><label>GCASH NAME</label><input type="text" placeholder="Full name as in GCash"></div>
+        <div class="form-group"><label>SCREENSHOT OF PAYMENT</label><input type="file" accept="image/*"></div>
+    </div>
+
+    <div id="maya-info" class="payment-info">
+        <div class="form-group"><label>MAYA NUMBER</label><input type="text" placeholder="09XXXXXXXXX" maxlength="11"></div>
+        <div class="form-group"><label>MAYA NAME</label><input type="text" placeholder="Full name as in Maya"></div>
+        <div class="form-group"><label>SCREENSHOT OF PAYMENT</label><input type="file" accept="image/*"></div>
+    </div>
+
+    <div id="card-info" class="payment-info">
+        <div class="form-group"><label>CARD NUMBER</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+        <div class="form-group" style="display:grid;grid-template-columns:2fr 1fr;gap:15px;">
+            <div><label>EXPIRY</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
+            <div><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
+        </div>
+        <div class="form-group"><label>CARDHOLDER NAME</label><input type="text" placeholder="Full name on card"></div>
+    </div>
+
+    <button class="confirm-btn" onclick="processPayment()">
+        CONFIRM & PAY <span id="pay-amount">₱0</span>
+    </button>
+</div>
+
+<script>
+    // LOAD REAL BOOKING DATA
+    const booking = JSON.parse(localStorage.getItem("bookingData"));
+    if (!booking) { alert("No booking data!"); location.href="booking.html"; }
+
+    const { services, totalPrice, fullName, date, time, beautician } = booking;
+
+    // Fill services
+    const list = document.getElementById("services-list");
+    services.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "summary-item";
+        div.innerHTML = `<span>• ${s}</span><span></span>`;
+        list.appendChild(div);
+    });
+
+    // Update totals
+    document.getElementById("total-amount").textContent = `₱${totalPrice.toLocaleString()}`;
+    document.getElementById("pay-amount").textContent = `₱${totalPrice.toLocaleString()}`;
+
+    // Switch payment method
+    document.querySelectorAll('.payment-method').forEach(el => {
+        el.addEventListener('click', () => {
+            document.querySelectorAll('.payment-method').forEach(e => e.classList.remove('selected'));
+            el.classList.add('selected');
+            document.querySelectorAll('.payment-info').forEach(e => e.classList.remove('active'));
+            document.getElementById(el.dataset.method + '-info').classList.add('active');
+        });
+    });
+
+    // Final payment
+    function processPayment() {
+        const method = document.querySelector('input[name="payment"]:checked').value;
+        const msg = `Thank you, ${fullName}!\n\nYour ₱${totalPrice.toLocaleString()} payment via ${method.toUpperCase()} has been recorded.\n\nWe will message you within 1 hour to confirm your appointment with ${beautician} on ${date} at ${time}.`;
+
+        alert(msg);
+
+        localStorage.setItem("paymentCompleted", "true");
+        localStorage.setItem("paymentMethod", method);
+
+        // Change this to your thank you page laterr
+        location.href = "thank.html"; 
+    }
+</script>
+
+</body>
+</html>

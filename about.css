@@ -1,0 +1,214 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+}
+
+body {
+    background-image: url('assets/background/all.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+
+.navbar {
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(131, 58, 112, 0.85); 
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-left img {
+    height: 55px;                    
+    filter: drop-shadow(0 0 10px rgba(255, 220, 90, 0.6));
+}
+
+.nav-title {
+    color: #ffdc5a;
+    font-size: 28px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.nav-center a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 3px;
+    transition: color 0.3s ease;
+}
+
+.nav-center a:hover,
+.nav-center a.active {                
+    color: #ffd6e8;
+}
+
+.book-btn {
+    background: linear-gradient(135deg, #f08bb6, #e76fa3);
+    padding: 12px 30px;
+    color: white;
+    border-radius: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 139, 182, 0.4);
+}
+
+.book-btn:hover {
+    background: linear-gradient(135deg, #ffaccf, #ff8bb9);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(240, 139, 182, 0.6);
+}
+
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 180px 20px 120px;
+    text-align: center;
+}
+
+.about-title {
+    font-size: 92px;
+    letter-spacing: 12px;
+    color: #ffdc5a;
+    text-shadow: 0 0 25px rgba(255, 220, 90, 0.7);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.about-subtitle {
+    font-size: 34px;
+    letter-spacing: 6px;
+    margin-bottom: 60px;
+    opacity: 0.9;
+}
+
+.logo-icon {
+    width: 210px;
+    margin: 50px auto;
+    filter: drop-shadow(0 0 25px rgba(255, 220, 90, 0.8));
+    display: block;
+}
+
+.about-text {
+    font-size: 20px;
+    line-height: 2.1;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 50px 60px;
+    border-radius: 28px;
+    backdrop-filter: blur(12px);
+    margin: 0 auto 90px;
+    max-width: 920px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+.founders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.founder-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px 35px;
+    border-radius: 28px;
+    width: 360px;
+    min-width: 320px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 35px rgba(240, 139, 182, 0.3);
+}
+
+.founder-name {
+    font-size: 25px;
+    color: #f08bb6;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.founder-role {
+    font-size: 17px;
+    color: #ffd6e8;
+    font-style: italic;
+    opacity: 0.95;
+}
+
+
+@media (max-width: 768px) {
+    .navbar { padding: 15px 30px; }
+    .nav-left img { height: 45px; }
+    .nav-title { font-size: 24px; }
+    .nav-center a { font-size: 16px; margin: 0 12px; }
+    .book-btn { padding: 10px 22px; font-size: 15px; }
+
+    .about-title { font-size: 62px; letter-spacing: 8px; }
+    .about-subtitle { font-size: 28px; }
+    .about-text { 
+        font-size: 18px; 
+        padding: 40px 30px;
+        margin-bottom: 70px;
+    }
+    .founder-card {
+        width: 90%;
+        max-width: 380px;
+    }
+}
+
+.logout-btn {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid #ffdc5a;
+    color: #ffdc5a;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 220, 90, 0.3);
+    color: white;
+    border-color: white;
+    box-shadow: 0 8px 25px rgba(255, 220, 90, 0.5);
+    transform: translateY(-3px);
+}
